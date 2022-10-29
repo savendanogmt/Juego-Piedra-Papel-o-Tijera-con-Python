@@ -1,0 +1,101 @@
+'''
+Juego clasico 🪨 Piedra , 📄 Papel o ✂️ Tijera.
+Creado por Sebastian Avendaño en el desarrollo del curso
+Fundamentos de Python en Platzi.
+Realizado en Octubre 2022.
+'''
+import random # Se usa para que elecciones aleatorias, en este caso, la usaremos para Computer.
+
+print("+*-*" * 10) # Se imprimirá el valor dentro de las comillas en 10 veces
+print("BIENVENIDO AL JUEGO DE 🪨  PIEDRA 📄 PAPEL O ✂️  TIJERA.")
+print("+*-*" * 10)
+user_wins = 0 # Contador para las veces que el usuario gana 
+computer_wins = 0 # Contador para las veces que la computadora gana
+rounds = 1 # Contador para los rounds que se han jugado. Siempre inicia en el primer round.
+options = ['piedra', 'papel', 'tijera']
+
+#El siguiente ciclo 'While' se usa para verificar que el usuario sí ingrese un numero,
+#En caso contrario, el programa no se detendra y sólo solicitará al usuario
+#que ingrese nuevamente un valor, hasta que el valor ingresado sea un entero
+while True:
+    try:
+        round_wins = int(input("Ingresa el numero de rounds para ganar la partida: "))
+        break
+    except ValueError:
+        print("Debes escribir un número 🔢")
+        continue
+
+while True:
+    print('***' * 10)
+    print('Round ', rounds)
+    print('***' * 10)
+    
+    rounds += 1 # Se incrementa en 1 para cada round siguiente
+    
+    #Este ciclo se realiza para que el usuario ingresa, de manera válida, la opción
+    # que escogió. De lo contrario, debe elegir nuevamente.
+    while True:
+        user_option = input('>>> Piedra, papel o tijera => ').lower()
+        if user_option in options:
+            break
+        else:
+            print('⚠ Esa opción no es valida 🚫 Por favor, elige nuevamente.')
+        
+    computer_option = random.choice(options) # Es la manera en que logramos que computer elija
+                                             # aleatoriamente una de las 3 opciones del juego.
+
+    print('🙋 option => ', user_option) # Mostramos la opción elegida por el usuario
+    print('🤖 option => ', computer_option) # Mostramos la opción elegida por la computadora
+
+    if user_option == computer_option: # En caso de que las opciones sean iguales
+        print('Empate!\n')
+    elif user_option == 'piedra':
+        if computer_option == 'tijera':
+            print('🪨 gana a ✂️')
+            print('¡User gana!\n')
+            user_wins += 1
+        else:
+            print('📄 gana a 🪨')
+            print('¡Computer gana!\n')
+            computer_wins += 1
+    elif user_option == 'papel':
+        if computer_option == 'piedra':
+            print('📄 gana a 🪨')
+            print('¡User gana!\n')
+            user_wins += 1
+        else:
+            print('✂️ gana a 📄')
+            print('¡Computer gana!\n')
+            computer_wins += 1
+    elif user_option == 'tijera':
+        if computer_option == 'papel':
+            print('✂️ gana a 📄')
+            print('¡User gana!\n')
+            user_wins += 1
+        else:
+            print('🪨 gana a ✂️')
+            print('¡Computer gana!\n')
+            computer_wins += 1
+    
+    # A continuación se muestran los resultados hasta ahora del juego
+    print(f'''
+    🤖 wins: {computer_wins}
+    🙋 wins: {user_wins}
+    ''')
+    
+    
+    # Este condicional verifica si ya se han ganado los rounds suficientes para ganar la partida
+    if computer_wins == round_wins:
+        print("-"*20)
+        print('🍀 El ganador es 🤖 🎖️+')
+        print('-'*23)
+        
+        break #Si ya se ha ganado la partida, se debe romper el ciclo con un Break
+    
+    # Este condicional verifica si ya se han ganado los rounds suficientes para ganar la partida
+    if user_wins == round_wins:
+        print("-1"*23)
+        print('+🍀 El ganador es 🙋 🎖️+')
+        print('-'*23)
+        
+        break
