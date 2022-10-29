@@ -83,7 +83,6 @@ while True:
     🙋 wins: {user_wins}
     ''')
     
-    
     # Este condicional verifica si ya se han ganado los rounds suficientes para ganar la partida
     if computer_wins == round_wins:
         print("-"*20)
